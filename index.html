@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<div ng-app="mainApp">
+
+    <div class="card" ng-controller="CardController as card">
+        <h1 class="visuallyhidden">{{card.page.title}}</h1>
+        <nav class="card__nav-tabs nav-tabs"
+             ng-controller="NavigationTabsController as navigationTab">
+            <ul class="nav-tabs__list">
+                <li class="nav-tabs__list-item">
+                    <a href="#" class="nav-tabs__btn btn btn-primary">Профиль</a>
+                </li>
+                <li class="nav-tabs__list-item">
+                    <a href="#" class="nav-tabs__btn btn btn-primary">Друзья пользователя</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="card__content">
+            <div class="card__profile-tab profile-tab">
+                <div class="card__preview">
+                    <div class="card__preview-img-wrapper">
+                        <img class="card__avatar-image" src="assets/img/UserPic.png" alt="User Avatar Photo">
+                    </div>
+                    <div class="card__preview-btn-wrapper">
+                        <button class="card__btn-add btn btn-info">Добавить в друзья</button>
+                    </div>
+                </div>
+                <div class="card__information">
+                    <div class="card__information-main-module">
+                        <h2 class="card__information-title">Виталя Гора</h2>
+                        <span class="card__information-city">г. Нижние Шахты</span>
+                    </div>
+                   <div class="card__information-personal">
+                        <ul class="card__information-personal-list">
+                            <li class="card__information-personal-item state-user">
+                                <span class="state-user__title">Семейное положение</span>
+                                <span class="state-user__text">Холост</span>
+                            </li>
+                            <li class="card__information-personal-item phone-user">
+                                <span class="phone-user__title">Телефон</span>
+                                <span class="phone-user__text">+7 (440) 554-32-12</span>
+                            </li>
+                            <li class="card__information-personal-item email-user">
+                                <span class="email-user__title">E-mail</span>
+                                <span class="email-user__text">vitalya@gora.ru</span>
+                            </li>
+                        </ul>
+                   </div>
+                    <div class="card__information-interests">
+                        <p class="card__information-interests-title">Интересы</p>
+                        <span class="card__information-interests-item interest">музыка</span>
+                        <span class="card__information-interests-item interest">компьютеры</span>
+                        <span class="card__information-interests-item interest">радио</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card__friends-tab friends-tab">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular.min.js"></script>
+<script src="./js/app.js"></script>
+<script src="./js/controllers/card.controller.js"></script>
+<script src="./js/controllers/navigation-tabs.controller.js"></script>
+</body>
+</html>

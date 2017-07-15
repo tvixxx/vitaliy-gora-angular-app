@@ -1,0 +1,132 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    background-color: #dfdfdf;
+    font-family: 'Arial', sans-serif;
+}
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.card {
+    display: block;
+    width: 490px;
+    height: auto;
+    margin-top: 150px;
+    margin-left: 300px;
+}
+
+.card__content {
+    box-sizing: border-box;
+    display: block;
+    height: 280px;
+    padding: 15px;
+    background-color: #fff;
+}
+
+.card__preview {
+    display: inline-block;
+    width: 132px;
+    vertical-align: top;
+}
+
+.card__preview-img-wrapper {
+    position: relative;
+    width: 132px;
+    height: 169px;
+    border-radius: 3px;
+    margin-bottom: 6px;
+}
+
+.card__preview-img-wrapper:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    box-shadow: inset 0 1px 6px 0 rgba(0, 0, 0, 0.38);
+    border-radius: 3px;
+}
+
+.card__avatar-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.card__preview-btn-wrapper {
+    display: block;
+    max-width: 132px;
+    width: 100%;
+}
+
+.card__preview + .card__information {
+    margin-left: 20px;
+}
+
+.card__information {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.btn {
+    box-sizing: border-box;
+    width: 100%;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    transition: all .15s ease;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #0982b3;
+    font-size: 14px;
+    line-height: 21px;
+}
+
+.btn-primary.selected {
+    background-color: #fff;
+    color: #000;
+}
+
+.btn-info {
+    font-size: 12px;
+    line-height: 23px;
+    padding-top: 3px;
+    padding-bottom: 2px;
+    color: #fff;
+    border-radius: 3px;
+    background-color: #e66d00;
+    box-shadow: 0 1px 1px 0 rgba(33, 33, 33, 0.38);
+}
+
+.btn-info:hover {
+    background-color: #e65500;
+}
+
+.card__information {
+    display: inline-block;
+}
+
+.card__information-title {
+    font-size: 23px;
+    line-height: 21px;
+    margin: 0;
+    color: #000;
+}
+
+.card__information-city {
+    font-size: 11px;
+    line-height: 21px;
+    color: #757575;
+}
