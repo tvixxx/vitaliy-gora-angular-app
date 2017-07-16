@@ -24,6 +24,30 @@ html, body {
     margin-left: 300px;
 }
 
+.nav-tabs {
+    position: relative;
+    display: block;
+}
+
+.nav-tabs__list {
+    margin: 0;
+    padding: 0;
+}
+
+.nav-tabs__list-item {
+    display: inline-block;
+    list-style: none;
+    line-height: 1;
+}
+
+.nav-tabs__btn {
+    font-size: 14px;
+    line-height: 21px;
+    text-decoration: none;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
 .card__content {
     box-sizing: border-box;
     display: block;
@@ -70,7 +94,7 @@ html, body {
 }
 
 .card__preview + .card__information {
-    margin-left: 20px;
+    margin-left: 16px;
 }
 
 .card__information {
@@ -88,10 +112,13 @@ html, body {
 }
 
 .btn-primary {
+    box-sizing: border-box;
+    display: inline-block;
     color: #fff;
     background-color: #0982b3;
     font-size: 14px;
     line-height: 21px;
+    padding: 6px 14px 7px;
 }
 
 .btn-primary.selected {
@@ -115,6 +142,7 @@ html, body {
 }
 
 .card__information {
+    width: 304px;
     display: inline-block;
 }
 
@@ -127,6 +155,101 @@ html, body {
 
 .card__information-city {
     font-size: 11px;
-    line-height: 21px;
+    line-height: 23px;
     color: #757575;
+}
+
+.card__information-main-module {
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.card__information-personal-list {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+    margin-bottom: 20px;
+}
+
+.card__information-personal-item {
+    width: 100%;
+    list-style: none;
+    font-size: 12px;
+    line-height: 23px;
+}
+
+.card__information-personal {
+    font-size: 12px;
+    line-height: 23px;
+}
+
+.state-user {
+    padding: 0;
+}
+
+.state-user__title,
+.phone-user__title,
+.email-user__title {
+    display: inline-block;
+    width: 162px;
+    font-weight: bold;
+}
+
+.state-user__text,
+.phone-user__text,
+.email-user__text-link {
+    display: inline-block;
+    width: 138px;
+    text-align: left;
+}
+
+.email-user__text-link {
+    color: #1574af;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.email-user__text-link:hover {
+    color: #1589c5;
+    text-decoration: none;
+}
+
+.card__information-interests {
+    display: block;
+    font-size: 0;
+}
+
+.card__information-interests-title {
+    margin: 0;
+    font-size: 12px;
+    line-height: 21px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.card__information-interests-item {
+    display: inline-block;
+}
+
+.card__information-interests-item + .card__information-interests-item {
+    margin-left: 5px;
+}
+
+.interest {
+    box-sizing: border-box;
+    padding: 0 10px;
+    font-size: 12px;
+    line-height: 23px;
+    color: #1574af;
+    background-color: #fff;
+    border: 1px solid #d5d5d5;
+    border-radius: 2px;
+    transition: all .15s ease-in-out;
+    cursor: pointer;
+}
+
+.interest:hover {
+    color: #000;
+    background-color: #f3f3f3;
 }
