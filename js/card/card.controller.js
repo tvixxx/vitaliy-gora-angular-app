@@ -34,8 +34,14 @@
         }
 
         function addInterest() {
-            vm.userProfile.interests.push(vm.newInterest);
-            vm.newInterest = null;
+
+            if (!vm.formInterest.$invalid) {
+                vm.userProfile.interests.push(vm.newInterest);
+                vm.newInterest = null;
+            }
+
+            return false;
+
         }
 
         function removeInterest($index) {

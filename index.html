@@ -82,16 +82,22 @@
                                     <div class="card__information-interests-input" ng-if="card.isInterestModuleOpen">
                                         <span class="card__information-interest-close-module" ng-click="card.toggleInterestAddModule()"></span>
                                         <span class="card__information-interest-name">Введите название интереса:</span>
-                                        <form action="" name="formInterest" novalidate>
+                                        <form action="" name="card.formInterest" novalidate ng-submit="card.addInterest()">
                                             <input type="text"
                                                    ng-model="card.newInterest.title"
-                                                   ng-pattern="/^[a-zA-Z0-9]*$/"
+                                                   ng-pattern="/^[a-zA-Zа-яА-Я]*$/"
                                                    ng-minlength="2"
                                                    ng-maxlength="20"
+                                                   name="title_interest"
                                                    required
                                                    placeholder="программирование">
+                                            <button type="submit" class="btn">Добавить интерес</button>
                                         </form>
-                                        <button class="btn" ng-submit="card.addInterest(item)">Добавить интерес</button>
+                                        <div ng-if="card.formInterest.$dirty && card.formInterest.$invalid">
+                                            <p class="help-block" ng-if="card.formInterest.title_interest.$error.pattern">Доступны только буквы!</p>
+                                            <p class="help-block" ng-if="card.formInterest.title_interest.$error.minlength">Минимальное количество символов: 2</p>
+                                            <p class="help-block" ng-if="card.formInterest.title_interest.$error.pattern">Максимальное количество символов: 20</p>
+                                        </div>
                                     </div>
                                 </div>
                             </ul>
