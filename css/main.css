@@ -5,6 +5,11 @@ html, body {
     font-family: 'Arial', sans-serif;
 }
 
+ul {
+    padding: 0;
+    margin: 0;
+}
+
 .visuallyhidden {
     border: 0;
     clip: rect(0 0 0 0);
@@ -27,6 +32,7 @@ html, body {
 .nav-tabs {
     position: relative;
     display: block;
+    z-index: 1;
 }
 
 .nav-tabs__list {
@@ -40,6 +46,10 @@ html, body {
     line-height: 1;
 }
 
+.nav-tabs__list-item + .nav-tabs__list-item {
+    margin-left: 10px;
+}
+
 .nav-tabs__btn {
     font-size: 14px;
     line-height: 21px;
@@ -49,17 +59,26 @@ html, body {
 }
 
 .card__content {
+    position: relative;
     box-sizing: border-box;
     display: block;
     height: 280px;
     padding: 15px;
     background-color: #fff;
+    box-shadow: 0 2px 5px 0 rgba(33, 33, 33, 0.31);
+    z-index: 2;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .card__preview {
     display: inline-block;
     width: 132px;
     vertical-align: top;
+}
+
+.card__profile-tab {
+    position: relative;
 }
 
 .card__preview-img-wrapper {
@@ -112,6 +131,7 @@ html, body {
 }
 
 .btn-primary {
+    position: relative;
     box-sizing: border-box;
     display: inline-block;
     color: #fff;
@@ -119,11 +139,24 @@ html, body {
     font-size: 14px;
     line-height: 21px;
     padding: 6px 14px 7px;
+    box-shadow: 0 3px 5px 0 rgba(0,0,0, .0);
+}
+
+.btn-primary:after {
+    position: absolute;
+    content: '';
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #fff;
+    z-index: 3;
 }
 
 .btn-primary.selected {
     background-color: #fff;
     color: #000;
+    box-shadow: 0 3px 5px 0 rgba(0,0,0, .31);
 }
 
 .btn-info {
@@ -137,8 +170,21 @@ html, body {
     box-shadow: 0 1px 1px 0 rgba(33, 33, 33, 0.38);
 }
 
+.btn-info + .btn-info {
+    margin-top: 5px;
+}
+
 .btn-info:hover {
     background-color: #e65500;
+}
+
+.btn-info.clicked {
+    background-color: grey;
+    cursor: default;
+}
+
+.btn-info:disabled:hover {
+    background-color: grey;
 }
 
 .card__information {
@@ -228,15 +274,23 @@ html, body {
     margin-bottom: 5px;
 }
 
-.card__information-interests-item {
-    display: inline-block;
+.card__information-list-interests {
+    display: block;
+    padding: 0;
+    margin: 0;
 }
 
-.card__information-interests-item + .card__information-interests-item {
-    margin-left: 5px;
+.card__information-interests-item {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.card__information-interests-item {
+    margin-right: 5px;
 }
 
 .interest {
+    position: relative;
     box-sizing: border-box;
     padding: 0 10px;
     font-size: 12px;
@@ -249,7 +303,180 @@ html, body {
     cursor: pointer;
 }
 
+.interest:before {
+    position: absolute;
+    top: 2px;
+    right: 0;
+
+}
+
 .interest:hover {
     color: #000;
     background-color: #f3f3f3;
 }
+
+.interest + .card__information-interests-show-input {
+    margin-left: 10px;
+}
+
+.card__information-interests-show-input {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+    line-height: 19px;
+    border-radius: 50%;
+    text-align: center;
+    background-color: #0982b3;
+    box-shadow: 1px 2px 5px 0 rgba(125, 125, 125, 0.3);
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+    color: #fff;
+}
+
+.card__information-interests-show-input:hover {
+    background-color: #099fd3;
+    box-shadow: 0 1px 4px 0 rgba(100, 100, 100, 0.4);
+}
+
+.card__information-interests-input {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    width: 200px;
+    text-align: left;
+    box-shadow: 0 3px 5px 0 rgba(0,0,0, .15);
+    background-color: #0982b3;
+    border-radius: 4px;
+    z-index: 2;
+}
+
+.card__information-interest-close-module {
+    position: absolute;
+    content: '';
+    top: 5px;
+    right: 5px;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+    z-index: 4;
+}
+
+.card__information-interest-close-module:hover {
+    background-color: #fefefe;
+}
+
+.card__information-interests-input input {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 16px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    outline: 0;
+    transition: all .2s ease-in-out;
+    border-radius: 2px;
+}
+
+.card__information-interests-input input:focus {
+    border: 1px solid #e66d00;
+}
+
+.card__information-interest-name {
+    font-size: 12px;
+}
+
+.friends-tab {
+    display: block;
+    overflow-y: auto;
+    max-height: 250px;
+}
+
+.friends-tab__list {
+    display: block;
+    padding: 0;
+    margin: 0;
+    max-width: 444px;
+}
+
+.friends-tab__list-item {
+    box-sizing: border-box;
+    display: inline-block;
+    max-width: 220px;
+    width: 100%;
+    min-height: 62px;
+    font-size: 0;
+    vertical-align: top;
+    margin-bottom: 30px;
+}
+
+.friends-tab__list-item:nth-child(odd) {
+    padding-right: 20px;
+}
+
+.friends-tab__preview {
+    display: inline-block;
+    max-width: 62px;
+    vertical-align: top;
+}
+
+.friends-tab__info-module {
+    position: relative;
+    display: inline-block;
+    max-width: 138px;
+    width: 100%;
+    min-height: 62px;
+    vertical-align: top;
+    box-sizing: border-box;
+    padding-left: 16px;
+}
+
+.friends-tab__name {
+    display: block;
+    max-width: 140px;
+    font-size: 13px;
+    line-height: 1;
+    color: #1574af;
+    margin: 0;
+    margin-bottom: 5px;
+    text-decoration: underline;
+    cursor: pointer;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.friends-tab__name:hover {
+    color: #1695D8;
+    text-decoration: none;
+}
+
+.friends-tab__city {
+    display: block;
+    word-break: break-all;
+    white-space: pre-line;
+    font-size: 11px;
+    line-height: 1;
+    color: #373737;
+}
+
+.friends-tab__online-status {
+    position: absolute;
+    bottom: 0;
+    left: 16px;
+    font-size: 10px;
+    line-height: 1;
+    color: #2f8a26;
+    font-style: italic;
+}
+
+
+
+

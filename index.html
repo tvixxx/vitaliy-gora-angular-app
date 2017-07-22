@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
 
@@ -11,68 +11,121 @@
 
     <div class="card" ng-controller="CardController as card">
         <h1 class="visuallyhidden">{{card.page.title}}</h1>
-        <nav class="card__nav-tabs nav-tabs"
-             ng-controller="NavigationTabsController as navigationTab">
-            <ul class="nav-tabs__list">
-                <li class="nav-tabs__list-item">
-                    <a href="#" class="nav-tabs__btn btn btn-primary">Профиль</a>
-                </li>
-                <li class="nav-tabs__list-item">
-                    <a href="#" class="nav-tabs__btn btn btn-primary">Друзья пользователя</a>
-                </li>
-            </ul>
-        </nav>
+        <div class="card__main-module"  ng-controller="NavigationTabsController as navigationTab">
+            <nav class="card__nav-tabs nav-tabs">
+                <ul class="nav-tabs__list">
+                    <li class="nav-tabs__list-item" ng-repeat="tab in navigationTab.tabs">
+                        <div ng-click="navigationTab.setTab(tab.tabId)" class="nav-tabs__btn btn btn-primary"
+                             ng-class="{'selected': navigationTab.isTabSet(tab.tabId)}"
+                        >
+                            {{tab.tabName}}
+                        </div>
+                    </li>
+                </ul>
+            </nav>
 
-        <div class="card__content">
-            <div class="card__profile-tab profile-tab">
-                <div class="card__preview">
-                    <div class="card__preview-img-wrapper">
-                        <img class="card__avatar-image" src="assets/img/UserPic.png" alt="User Avatar Photo">
+            <div class="card__content">
+                <div class="card__profile-tab profile-tab" ng-if="navigationTab.isTabSet('profile')">
+                    <div class="card__preview">
+                        <div class="card__preview-img-wrapper">
+                            <img class="card__avatar-image" src="assets/img/UserPic.png" alt="User Avatar Photo">
+                        </div>
+                        <div class="card__preview-btn-wrapper">
+                            <button class="card__btn-add btn btn-info"
+                                    ng-class="{'clicked': card.isRequestSend}"
+                                    ng-click="card.addToFriend($event)"
+                                    ng-disabled="card.btnIsClicked" ng-bind="card.isRequestSend ? card.buttonTitle.disabledName : card.buttonTitle.nonClicked">
+                            </button>
+                            <button ng-if="card.isRequestSend"
+                                    ng-click="card.dismissRequest()"
+                                    class="card__btn-add btn btn-info"
+                                    >
+                                Отменить заявку
+                            </button>
+                        </div>
                     </div>
-                    <div class="card__preview-btn-wrapper">
-                        <button class="card__btn-add btn btn-info">Добавить в друзья</button>
+                    <div class="card__information">
+                        <div class="card__information-main-module">
+                            <h2 class="card__information-title" ng-bind="card.userProfile.userName"></h2>
+                            <span class="card__information-city" ng-bind="card.userProfile.city"></span>
+                        </div>
+                        <div class="card__information-personal">
+                            <ul class="card__information-personal-list">
+                                <li class="card__information-personal-item state-user">
+                                    <span class="state-user__title">Семейное положение</span>
+                                    <span class="state-user__text" ng-bind="card.userProfile.maritalStatus"></span>
+                                </li>
+                                <li class="card__information-personal-item phone-user">
+                                    <span class="phone-user__title">Телефон</span>
+                                    <span class="phone-user__text" ng-bind="card.userProfile.mobilePhone"></span>
+                                </li>
+                                <li class="card__information-personal-item email-user">
+                                    <span class="email-user__title">E-mail</span>
+                                    <a href="mailto:vitalya@gira.ru"
+                                       class="email-user__text-link" ng-bind="card.userProfile.email"></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card__information-interests">
+                            <p class="card__information-interests-title">Интересы</p>
+                            <ul class="card__information-list-interests">
+                                <li class="card__information-interests-item interest"
+                                    ng-repeat="interest in card.userProfile.interests"
+                                    ng-click="card.removeInterest($index)"
+                                >
+                                    <span class="interest__text">{{interest.title}}</span>
+                                    <span class="interest__close-module"></span>
+                                </li>
+                                <div class="card__information-interests-show-input">
+                                    <span ng-click="card.toggleInterestAddModule()">+</span>
+
+                                    <div class="card__information-interests-input" ng-if="card.isInterestModuleOpen">
+                                        <span class="card__information-interest-close-module" ng-click="card.toggleInterestAddModule()"></span>
+                                        <span class="card__information-interest-name">Введите название интереса:</span>
+                                        <form action="" name="formInterest" novalidate>
+                                            <input type="text"
+                                                   ng-model="card.newInterest.title"
+                                                   ng-pattern="/^[a-zA-Z0-9]*$/"
+                                                   ng-minlength="2"
+                                                   ng-maxlength="20"
+                                                   required
+                                                   placeholder="программирование">
+                                        </form>
+                                        <button class="btn" ng-submit="card.addInterest(item)">Добавить интерес</button>
+                                    </div>
+                                </div>
+                            </ul>
+
+                        </div>
                     </div>
                 </div>
-                <div class="card__information">
-                    <div class="card__information-main-module">
-                        <h2 class="card__information-title">Виталя Гора</h2>
-                        <span class="card__information-city">г. Нижние Шахты</span>
-                    </div>
-                   <div class="card__information-personal">
-                        <ul class="card__information-personal-list">
-                            <li class="card__information-personal-item state-user">
-                                <span class="state-user__title">Семейное положение</span>
-                                <span class="state-user__text">Холост</span>
-                            </li>
-                            <li class="card__information-personal-item phone-user">
-                                <span class="phone-user__title">Телефон</span>
-                                <span class="phone-user__text">+7 (440) 554-32-12</span>
-                            </li>
-                            <li class="card__information-personal-item email-user">
-                                <span class="email-user__title">E-mail</span>
-                                <a href="mailto:vitalya@gira.ru" class="email-user__text-link">vitalya@gora.ru</a>
-                            </li>
-                        </ul>
-                   </div>
-                    <div class="card__information-interests">
-                        <p class="card__information-interests-title">Интересы</p>
-                        <span class="card__information-interests-item interest">музыка</span>
-                        <span class="card__information-interests-item interest">компьютеры</span>
-                        <span class="card__information-interests-item interest">радио</span>
-                    </div>
+
+                <div class="card__friends-tab friends-tab" ng-if="navigationTab.isTabSet('userFriends')">
+                    <ul class="friends-tab__list">
+                        <li class="friends-tab__list-item" ng-repeat="item in card.userFriends">
+                            <div class="friends-tab__preview">
+                                <img ng-src="{{item.source}}" alt="Image" class="friends-tab__preview-img">
+                            </div>
+                            <div class="friends-tab__info-module">
+                                <h2 class="friends-tab__name">{{item.friendName}}</h2>
+                                <span class="friends-tab__city">{{item.friendCity}}</span>
+                                <span class="friends-tab__online-status" ng-if="item.isOnline">Online</span>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-            </div>
-
-            <div class="card__friends-tab friends-tab">
-
             </div>
         </div>
+
     </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.32/angular.min.js"></script>
 <script src="./js/app.js"></script>
-<script src="js/card/navigation-tabs/card.controller.js"></script>
-<script src="js/card/controllers/navigation-tabs.controller.js"></script>
+<script src="js/card/card.controller.js"></script>
+<script src="js/card/navigation-tabs/navigation-tabs.controller.js"></script>
+<script src="js/card/services/user-profile-service.js"></script>
+<script src="js/card/services/user-navigation-tabs-service.js"></script>
+<script src="js/card/services/user-friends-service.js"></script>
 </body>
 </html>
