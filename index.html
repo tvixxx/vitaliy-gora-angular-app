@@ -46,29 +46,29 @@
                     </div>
                     <div class="card__information">
                         <div class="card__information-main-module">
-                            <h2 class="card__information-title" ng-bind="card.userProfile.userName"></h2>
-                            <span class="card__information-city" ng-bind="card.userProfile.city"></span>
+                            <h2 contenteditable="true" data-title="userName" ng-blur="card.saveChanges($event)" ng-model="card.userProfile.userName" class="card__information-title" ng-bind="card.userProfile.userName"></h2>
+                            <span contenteditable="true" data-title="userCity" ng-blur="card.saveChanges($event)" ng-model="card.userProfile.city" class="card__information-city" ng-bind="card.userProfile.city"></span>
                         </div>
                         <div class="card__information-personal">
                             <ul class="card__information-personal-list">
                                 <li class="card__information-personal-item state-user">
                                     <span class="state-user__title">Семейное положение</span>
-                                    <span class="state-user__text" ng-bind="card.userProfile.maritalStatus"></span>
+                                    <span contenteditable="true"  class="state-user__text" ng-bind="card.userProfile.maritalStatus"></span>
                                 </li>
                                 <li class="card__information-personal-item phone-user">
                                     <span class="phone-user__title">Телефон</span>
-                                    <span class="phone-user__text" ng-bind="card.userProfile.mobilePhone"></span>
+                                    <span contenteditable="true" class="phone-user__text" ng-bind="card.userProfile.mobilePhone"></span>
                                 </li>
                                 <li class="card__information-personal-item email-user">
                                     <span class="email-user__title">E-mail</span>
-                                    <a href="mailto:vitalya@gira.ru"
-                                       class="email-user__text-link" ng-bind="card.userProfile.email"></a>
+                                    <span contenteditable="true" ng-href="{{card.userProfile.email}}"
+                                       class="email-user__text-link" ng-bind="card.userProfile.email"></span>
                                 </li>
                             </ul>
                         </div>
                         <div class="card__information-interests">
                             <p class="card__information-interests-title">Интересы</p>
-                            <ul class="card__information-list-interests">
+                            <ul ng-if="card.userProfile.interests" class="card__information-list-interests">
                                 <li class="card__information-interests-item interest"
                                     ng-repeat="interest in card.userProfile.interests"
                                     ng-click="card.removeInterest($index)"
@@ -76,7 +76,7 @@
                                     <span class="interest__text">{{interest.title}}</span>
                                     <span class="interest__close-module"></span>
                                 </li>
-                                <div class="card__information-interests-show-input">
+                                <div ng-if="card.userProfile.interests" class="card__information-interests-show-input">
                                     <span ng-click="card.toggleInterestAddModule()">+</span>
 
                                     <div class="card__information-interests-input" ng-if="card.isInterestModuleOpen">
@@ -133,5 +133,6 @@
 <script src="js/card/services/user-profile-service.js"></script>
 <script src="js/card/services/user-navigation-tabs-service.js"></script>
 <script src="js/card/services/user-friends-service.js"></script>
+<script src="js/card/services/constant-service.js"></script>
 </body>
 </html>

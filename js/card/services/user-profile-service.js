@@ -3,32 +3,28 @@
 
     angular
         .module('mainApp')
-        .factory('userProfileService', userProfileService);
+        .factory('userProfileService', ['$q', '$http', userProfileService]);
 
-    function userProfileService() {
+    function userProfileService($q, $http) {
+
         return {
             getUserData: getUserData
         };
 
         function getUserData() {
-            return {
-                userName: 'Виталя Гора',
-                city: 'г. Нижние Шахты',
-                maritalStatus: 'Холост',
-                mobilePhone: '+7 (440) 554-32-12',
-                email: 'vitalya@gora.ru',
-                interests: [
-                    {
-                        title: 'музыка'
-                    },
-                    {
-                        title: 'компьютеры'
-                    },
-                    {
-                        title: 'радио'
-                    }
-                ]
-            }
+            var userProfilePath = './model/user-profile.json';
+
+            return $http.get(userProfilePath)
+                .then(getUserDataSuccess)
+                .catch(getUserDataError);
+        }
+
+        function getUserDataSuccess(response) {
+            return response.data;
+        }
+
+        function getUserDataError(response) {
+            return $q.reject('Ошибка. Не удалось получить данные пользователя. (HTTP status: ' + response.status + ')');
         }
     }
 })();

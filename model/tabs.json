@@ -1,0 +1,6 @@
+{
+  "tabs":[
+    { "tabName": "Профиль", "tabId": "profile" },
+    { "tabName": "Друзья пользователя", "tabId": "userFriends" }
+  ]
+}
