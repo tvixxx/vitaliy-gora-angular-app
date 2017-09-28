@@ -10,23 +10,12 @@
         vm.page.title = constants.mainPageTitle;
         vm.lettersPattern = constants.lettersPattern;
         vm.isInterestModuleOpen = false;
-        vm.localStorageData = {
-            requestToFriend: 'requestToFriend',
-            userProfile: 'userProfile',
-            userName: '',
-            userCity: '',
-            userMaritalStatus: '',
-            userPhone: '',
-            userEmail: '',
-            userInterests: [
-                'музыка',
-                'компьютеры',
-                'радио'
-            ]
-        };
+        vm.localStorageData = {};
         vm.buttonTitle = constants.buttonTitle;
+        vm.userProfileKey = 'userProfile';
+        vm.cacheUserInfo = null;
 
-        vm.isRequestSend = isExistInLocalStorage(vm.localStorageData.requestToFriend);
+        vm.isRequestSend = isExistInLocalStorage('requestToFriend');
 
         function isExistInLocalStorage(item) {
             var data = JSON.parse(localStorage.getItem(item));
@@ -38,17 +27,13 @@
              .catch(getUserDataError);
 
          function getUserDataSuccess(userProfile) {
-             debugger;
-             if (isExistInLocalStorage(vm.localStorageData.userProfile)) {
-                 var userProfileObj = JSON.parse(localStorage.getItem(vm.localStorageData.userProfile));
+             vm.cacheUserInfo = userProfile;
 
-                 for (var key in userProfileObj) {
-                     if (userProfileObj[key] === undefined ) {
-                         vm.userProfile[key] = userProfile[key];
-                     }
+             if (isExistInLocalStorage(vm.userProfileKey)) {
+                 var userProfileObj = JSON.parse(localStorage.getItem(vm.userProfileKey));
 
-                     vm.userProfile[key] = userProfileObj[key];
-                 }
+                 vm.userProfile = userProfileObj;
+                 return;
              }
 
              vm.userProfile = userProfile;
@@ -110,14 +95,19 @@
             var dataAttr = target.getAttribute('data-title');
             var targetText = target.textContent;
 
-            if (targetText && targetText.length > 0) {
-                setInStorage(dataAttr, targetText);
+            if (vm.cacheUserInfo) {
+                for (var key in vm.cacheUserInfo) {
+                    if (vm.cacheUserInfo[key] !== undefined) {
+                        vm.localStorageData[key] = vm.cacheUserInfo[key];
+                    }
+                }
             }
-            console.log(dataAttr);
-        }
 
-        function saveTitle() {
+            vm.localStorageData[dataAttr] = targetText.trim();
 
+            var stringifyLocalStorage = JSON.stringify(vm.localStorageData);
+
+            setInStorage(vm.userProfileKey, stringifyLocalStorage);
         }
 
         function setInStorage(name, obj) {

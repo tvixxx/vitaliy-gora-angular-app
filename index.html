@@ -46,23 +46,48 @@
                     </div>
                     <div class="card__information">
                         <div class="card__information-main-module">
-                            <h2 contenteditable="true" data-title="userName" ng-blur="card.saveChanges($event)" ng-model="card.userProfile.userName" class="card__information-title" ng-bind="card.userProfile.userName"></h2>
-                            <span contenteditable="true" data-title="userCity" ng-blur="card.saveChanges($event)" ng-model="card.userProfile.city" class="card__information-city" ng-bind="card.userProfile.city"></span>
+                            <h2 contenteditable="true"
+                                data-title="userName"
+                                ng-blur="card.saveChanges($event)"
+                                ng-model="card.userProfile.userName"
+                                class="card__information-title"
+                                ng-bind="card.userProfile.userName"></h2>
+                            <span contenteditable="true"
+                                  data-title="city"
+                                  ng-blur="card.saveChanges($event)"
+                                  ng-model="card.userProfile.city"
+                                  class="card__information-city"
+                                  ng-bind="card.userProfile.city"></span>
                         </div>
                         <div class="card__information-personal">
                             <ul class="card__information-personal-list">
                                 <li class="card__information-personal-item state-user">
                                     <span class="state-user__title">Семейное положение</span>
-                                    <span contenteditable="true"  class="state-user__text" ng-bind="card.userProfile.maritalStatus"></span>
+                                    <span contenteditable="true"
+                                          data-title="maritalStatus"
+                                          class="state-user__text"
+                                          ng-blur="card.saveChanges($event)"
+                                          ng-model="card.userProfile.maritalStatus"
+                                          ng-bind="card.userProfile.maritalStatus"></span>
                                 </li>
                                 <li class="card__information-personal-item phone-user">
                                     <span class="phone-user__title">Телефон</span>
-                                    <span contenteditable="true" class="phone-user__text" ng-bind="card.userProfile.mobilePhone"></span>
+                                    <span contenteditable="true"
+                                          class="phone-user__text"
+                                          data-title="mobilePhone"
+                                          ng-blur="card.saveChanges($event)"
+                                          ng-model="card.userProfile.mobilePhone"
+                                          ng-bind="card.userProfile.mobilePhone"></span>
                                 </li>
                                 <li class="card__information-personal-item email-user">
                                     <span class="email-user__title">E-mail</span>
-                                    <span contenteditable="true" ng-href="{{card.userProfile.email}}"
-                                       class="email-user__text-link" ng-bind="card.userProfile.email"></span>
+                                    <span contenteditable="true"
+                                          ng-href="{{card.userProfile.email}}"
+                                          class="email-user__text-link"
+                                          data-title="email"
+                                          ng-blur="card.saveChanges($event)"
+                                          ng-model="card.userProfile.email"
+                                          ng-bind="card.userProfile.email"></span>
                                 </li>
                             </ul>
                         </div>
